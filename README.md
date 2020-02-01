@@ -85,8 +85,17 @@ Add notes about how to use the system.
 Add additional notes about how to deploy this on a live system.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
+
 - [Express](https://expressjs.com/) - Server Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Sucrase](https://github.com/alangpierce/sucrase) - Sucrase
+- [Nodemon](https://github.com/remy/nodemon/) - Nodemon
+- [prettier](https://github.com/prettier/prettier) - Prettier
+- [eslint](https://github.com/eslint/eslint/) - eslint
+- [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) - eslint Config Prettier
+- [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) - eslint plugin import
+- [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) - eslint plugin prettier
+- [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packageseslint-config-airbnb-base) - packageseslint-config-airbnb-base
 
 ## ✍️ Authors <a name = "authors"></a>
 
