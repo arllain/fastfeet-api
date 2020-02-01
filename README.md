@@ -85,8 +85,11 @@ Add notes about how to use the system.
 Add additional notes about how to deploy this on a live system.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
+
 - [Express](https://expressjs.com/) - Server Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Sucrase](https://github.com/alangpierce/sucrase) - Sucrase
+- [Nodemon](https://github.com/remy/nodemon/) - Nodemon
 
 ## ✍️ Authors <a name = "authors"></a>
 
