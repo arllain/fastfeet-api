@@ -96,6 +96,9 @@ Add additional notes about how to deploy this on a live system.
 - [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) - eslint plugin import
 - [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) - eslint plugin prettier
 - [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packageseslint-config-airbnb-base) - packageseslint-config-airbnb-base
+- [Sequelize](https://github.com/sequelize/sequelize/) - Sequelize
+- [sequelize-cli](https://github.com/sequelize/cli/) - sequelize-cli
+- [pg-hstore](https://github.com/scarney81/pg-hstore/) - pg-hstore
 
 ## ✍️ Authors <a name = "authors"></a>
 
