@@ -99,6 +99,7 @@ Add additional notes about how to deploy this on a live system.
 - [Sequelize](https://github.com/sequelize/sequelize/) - Sequelize
 - [sequelize-cli](https://github.com/sequelize/cli/) - sequelize-cli
 - [pg-hstore](https://github.com/scarney81/pg-hstore/) - pg-hstore
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js) - bcryptjs
 
 ## ✍️ Authors <a name = "authors"></a>
 
