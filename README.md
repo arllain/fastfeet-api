@@ -100,6 +100,7 @@ Add additional notes about how to deploy this on a live system.
 - [sequelize-cli](https://github.com/sequelize/cli/) - sequelize-cli
 - [pg-hstore](https://github.com/scarney81/pg-hstore/) - pg-hstore
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) - bcryptjs
+- [jwt](https://github.com/dcodeIO/bcrypt.js) - jwt
 
 ## ✍️ Authors <a name = "authors"></a>
 
