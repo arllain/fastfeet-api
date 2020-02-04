@@ -102,6 +102,7 @@ Add additional notes about how to deploy this on a live system.
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) - bcryptjs
 - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - jsonwebtoken
 - [yup](https://github.com/jquense/yup)-yup
+  '[multer](https://github.com/expressjs/multer)-multer
 
 ## ✍️ Authors <a name = "authors"></a>
 
