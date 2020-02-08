@@ -101,8 +101,8 @@ Add additional notes about how to deploy this on a live system.
 - [pg-hstore](https://github.com/scarney81/pg-hstore/) - pg-hstore
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) - bcryptjs
 - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - jsonwebtoken
-- [yup](https://github.com/jquense/yup)-yup
-- [multer](https://github.com/expressjs/multer)-multer
+- [yup](https://github.com/jquense/yup) - yup
+- [multer](https://github.com/expressjs/multer) - multer
 
 ## ✍️ Authors <a name = "authors"></a>
 
