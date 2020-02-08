@@ -4,8 +4,6 @@ class Deliveries extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
-        email: Sequelize.STRING,
         start_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
         canceled_at: Sequelize.DATE,
