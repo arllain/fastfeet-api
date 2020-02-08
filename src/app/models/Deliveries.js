@@ -27,7 +27,7 @@ class Deliveries extends Model {
     });
     this.belongsTo(models.File, {
       foreignKey: 'signature_id',
-      as: 'File',
+      as: 'file',
     });
     this.belongsTo(models.Product, {
       foreignKey: 'product_id',

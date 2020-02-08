@@ -40,9 +40,9 @@ class DeliveriesController {
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      recipient_id: Yup.number(),
-      deliverer_id: Yup.number(),
-      product_id: Yup.number(),
+      recipient_id: Yup.number().required(),
+      deliveryman_id: Yup.number().required(),
+      product_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -90,6 +90,52 @@ class DeliveriesController {
       product_id,
     });
     return res.json(deliveries);
+  }
+
+  async update(req, res) {
+    const deliveries_id = req.params.id;
+
+    const schema = Yup.object().shape({
+      recipient_id: Yup.number(),
+      deliveryman_id: Yup.number(),
+      product_id: Yup.number(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation failed' });
+    }
+
+    const deliveries = await Deliveries.findByPk(deliveries_id);
+
+    if (!deliveries) {
+      return res.status(400).json({ erro: 'Delivery not found' });
+    }
+    const {
+      id,
+      recipient_id,
+      deliveryman_id,
+      product_id,
+    } = await deliveries.update(req.body);
+    return res.json({
+      id,
+      recipient_id,
+      deliveryman_id,
+      product_id,
+    });
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const deliveries = await Deliveries.destroy({
+      where: { id },
+    });
+
+    if (deliveries) {
+      return res.status(200).json({ deleted: 'The delivery was deleted' });
+    }
+
+    return res.status(400).json({ erro: 'Delivery not found' });
   }
 }
 
