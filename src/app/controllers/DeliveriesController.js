@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import Recipient from '../models/Recipient';
-import Deliverer from '../models/Deliverer';
+import DeliveryMan from '../models/DeliveryMan';
 import Deliveries from '../models/Deliveries';
 import Product from '../models/Product';
 import File from '../models/File';
@@ -28,8 +28,8 @@ class DeliveriesController {
           ],
         },
         {
-          model: Deliverer,
-          as: 'deliverer',
+          model: DeliveryMan,
+          as: 'deliveryman',
           attributes: ['id', 'name', 'email', 'avatar_id'],
           include: [{ model: File, as: 'avatar', attributes: ['url', 'path'] }],
         },
@@ -49,7 +49,7 @@ class DeliveriesController {
       return res.status(400).json({ error: 'Validation failed' });
     }
 
-    const { recipient_id, deliverer_id, product_id } = req.body;
+    const { recipient_id, deliveryman_id, product_id } = req.body;
 
     /**
      * Check if recipient exists
@@ -65,12 +65,12 @@ class DeliveriesController {
     /**
      * Check if deliverer exists
      */
-    const deliverer = await Deliverer.findOne({
-      where: { id: deliverer_id },
+    const deliveryman = await DeliveryMan.findOne({
+      where: { id: deliveryman_id },
     });
 
-    if (!deliverer) {
-      return res.status(400).json({ error: 'Deliverer not found' });
+    if (!deliveryman) {
+      return res.status(400).json({ error: 'DeliveryMan not found' });
     }
 
     /**
@@ -86,7 +86,7 @@ class DeliveriesController {
 
     const deliveries = await Deliveries.create({
       recipient_id,
-      deliverer_id,
+      deliveryman_id,
       product_id,
     });
     return res.json(deliveries);

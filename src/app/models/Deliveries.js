@@ -21,9 +21,9 @@ class Deliveries extends Model {
       foreignKey: 'recipient_id',
       as: 'recipient',
     });
-    this.belongsTo(models.Deliverer, {
-      foreignKey: 'deliverer_id',
-      as: 'deliverer',
+    this.belongsTo(models.DeliveryMan, {
+      foreignKey: 'deliveryman_id',
+      as: 'deliveryman',
     });
     this.belongsTo(models.File, {
       foreignKey: 'signature_id',
