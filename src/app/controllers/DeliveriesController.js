@@ -7,7 +7,8 @@ import Deliveries from '../models/Deliveries';
 import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import SendDeliveryMail from '../jobs/SendDeliveryMail';
 
 class DeliveriesController {
   async index(req, res) {
@@ -105,16 +106,28 @@ class DeliveriesController {
     /**
      *  Notify deliveryman for new deliveries by email
      */
-    await Mail.sendMail({
-      to: `${deliveryman.name} <${deliveryman.email}>`,
-      subject: 'New Delivery',
-      template: 'sendDeliveryMail',
-      context: {
-        develiryman: deliveryman.name,
-        deliveryId: deliveries.id,
-        date: formattedDate,
-        product: `${product.id}  ${product.name}`,
-      },
+    const delivery = await Deliveries.findByPk(deliveries.id, {
+      include: [
+        {
+          model: DeliveryMan,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name'],
+        },
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name'],
+        },
+      ],
+    });
+
+    await Queue.add(SendDeliveryMail.key, {
+      delivery,
     });
 
     /**

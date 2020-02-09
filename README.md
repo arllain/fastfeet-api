@@ -108,6 +108,7 @@ Add additional notes about how to deploy this on a live system.
 - [nodemailer](https://github.com/nodemailer/nodemailer) - nodemailer
 - [nodemailer-express-handlebars](https://github.com/yads/nodemailer-express-handlebars) - nodemailer-express-handlebars
 - [express-handlebars](https://github.com/ericf/express-handlebars) - express-handlebars
+- [bee-queue](https://github.com/bee-queue/bee-queue) - bee-queue
 
 ## ✍️ Authors <a name = "authors"></a>
 
