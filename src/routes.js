@@ -7,7 +7,7 @@ import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import DeliveryManController from './app/controllers/DeliveryManController';
 import ProductController from './app/controllers/ProductController';
-import DeliveriesController from './app/controllers/DeliveriesController';
+import DeliveryController from './app/controllers/DeliveryController';
 import UserController from './app/controllers/UserController';
 import NotificationController from './app/controllers/NotificationController';
 
@@ -46,11 +46,11 @@ routes.post('/deliveryman', DeliveryManController.store);
 routes.put('/deliveryman/:id', DeliveryManController.update);
 routes.delete('/deliveryman/:id', DeliveryManController.delete);
 
-// Deliveries routes
-routes.get('/deliveries', DeliveriesController.index);
-routes.post('/deliveries', DeliveriesController.store);
-routes.put('/deliveries/:id', DeliveriesController.update);
-routes.delete('/deliveries/:id', DeliveriesController.delete);
+// Delivery routes
+routes.get('/delivery', DeliveryController.index);
+routes.post('/delivery', DeliveryController.store);
+routes.put('/delivery/:id', DeliveryController.update);
+routes.delete('/delivery/:id', DeliveryController.delete);
 
 // Notifications routes
 routes.get('/notifications/:deliveryman_id', NotificationController.index);
