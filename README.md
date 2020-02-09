@@ -104,6 +104,7 @@ Add additional notes about how to deploy this on a live system.
 - [yup](https://github.com/jquense/yup) - yup
 - [multer](https://github.com/expressjs/multer) - multer
 - [date-fns](https://github.com/date-fns/date-fns) - date-fns
+- [mongoose](https://github.com/Automattic/mongoose) - mongoose
 
 ## ✍️ Authors <a name = "authors"></a>
 

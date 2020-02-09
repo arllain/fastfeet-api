@@ -1,9 +1,12 @@
 import * as Yup from 'yup';
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import Recipient from '../models/Recipient';
 import DeliveryMan from '../models/DeliveryMan';
 import Deliveries from '../models/Deliveries';
 import Product from '../models/Product';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
 
 class DeliveriesController {
   async index(req, res) {
@@ -89,6 +92,25 @@ class DeliveriesController {
       deliveryman_id,
       product_id,
     });
+
+    /**
+     * Notify deliveryman for new deliveries
+     */
+
+    // const deliveryman = await DeliveryMan.findByPk(deliveryman_id);
+    const formattedDate = format(
+      new Date(),
+      "'dia' dd 'de' MMMM', às' H:mm'h' ",
+      {
+        locale: ptBR,
+      }
+    );
+
+    await Notification.create({
+      content: `Nova entrega de ${deliveryman.name} cadastrada no dia ${formattedDate}`,
+      deliveryman: deliveryman_id,
+    });
+
     return res.json(deliveries);
   }
 
