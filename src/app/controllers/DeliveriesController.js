@@ -107,8 +107,8 @@ class DeliveriesController {
      */
     await Mail.sendMail({
       to: `${deliveryman.name} <${deliveryman.email}>`,
-      subject: 'New delivery available',
-      template: 'delivery_new',
+      subject: 'New Delivery',
+      template: 'sendDeliveryMail',
       context: {
         develiryman: deliveryman.name,
         deliveryId: deliveries.id,
