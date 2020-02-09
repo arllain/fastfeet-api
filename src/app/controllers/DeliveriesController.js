@@ -7,6 +7,7 @@ import Deliveries from '../models/Deliveries';
 import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
+import Mail from '../../lib/Mail';
 
 class DeliveriesController {
   async index(req, res) {
@@ -93,11 +94,6 @@ class DeliveriesController {
       product_id,
     });
 
-    /**
-     * Notify deliveryman for new deliveries
-     */
-
-    // const deliveryman = await DeliveryMan.findByPk(deliveryman_id);
     const formattedDate = format(
       new Date(),
       "'dia' dd 'de' MMMM', às' H:mm'h' ",
@@ -106,6 +102,24 @@ class DeliveriesController {
       }
     );
 
+    /**
+     *  Notify deliveryman for new deliveries by email
+     */
+    await Mail.sendMail({
+      to: `${deliveryman.name} <${deliveryman.email}>`,
+      subject: 'New delivery available',
+      template: 'delivery_new',
+      context: {
+        develiryman: deliveryman.name,
+        deliveryId: deliveries.id,
+        date: formattedDate,
+        product: `${product.id}  ${product.name}`,
+      },
+    });
+
+    /**
+     * Notify deliveryman for new deliveries by messege
+     */
     await Notification.create({
       content: `${deliveryman.name}, você tem uma nova entrega cadastrada no 
       ${formattedDate}, e já encontra-se disponível para retirada.`,

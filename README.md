@@ -105,6 +105,9 @@ Add additional notes about how to deploy this on a live system.
 - [multer](https://github.com/expressjs/multer) - multer
 - [date-fns](https://github.com/date-fns/date-fns) - date-fns
 - [mongoose](https://github.com/Automattic/mongoose) - mongoose
+- [nodemailer](https://github.com/nodemailer/nodemailer) - nodemailer
+- [nodemailer-express-handlebars](https://github.com/yads/nodemailer-express-handlebars) - nodemailer-express-handlebars
+- [express-handlebars](https://github.com/ericf/express-handlebars) - express-handlebars
 
 ## ✍️ Authors <a name = "authors"></a>
 

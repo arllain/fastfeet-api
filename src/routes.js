@@ -14,13 +14,17 @@ import NotificationController from './app/controllers/NotificationController';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+// No authentication needed routes
+
 // Session routes
 routes.get('/sessions', SessionController.login);
 
 // Auth middleware. All routes bellow it will require an authenticated user
 routes.use(authMiddleware);
 
-// Deliverer routes
+// Authentication needed routes
+
+// User routes
 routes.get('/users/:id', UserController.show);
 
 // Recipient routes
