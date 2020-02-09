@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
-import Deliverer from '../models/Deliverer';
+import DeliveryMan from '../models/DeliveryMan';
 import File from '../models/File';
 
-class DelivererController {
+class DeliveryManController {
   async index(req, res) {
-    const deliverers = await Deliverer.findAll({
+    const deliveryMan = await DeliveryMan.findAll({
       attributes: ['id', 'name', 'email'],
       include: [
         {
@@ -13,7 +13,7 @@ class DelivererController {
         },
       ],
     });
-    res.json(deliverers);
+    res.json(deliveryMan);
   }
 
   async store(req, res) {
@@ -29,15 +29,15 @@ class DelivererController {
       return res.status(400).json({ error: 'Validation failed' });
     }
 
-    const delivererExists = await Deliverer.findOne({
+    const deliveryManExists = await DeliveryMan.findOne({
       where: { email: req.body.email },
     });
 
-    if (delivererExists) {
-      return res.status(400).json({ erro: 'Deliverer already exists' });
+    if (deliveryManExists) {
+      return res.status(400).json({ erro: 'DeliveryMan already exists' });
     }
 
-    const { id, name, email, avatar_id } = await Deliverer.create(req.body);
+    const { id, name, email, avatar_id } = await DeliveryMan.create(req.body);
 
     return res.json({
       id,
@@ -48,7 +48,7 @@ class DelivererController {
   }
 
   async update(req, res) {
-    const deliverer_id = req.params.id;
+    const deliveryman_id = req.params.id;
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -60,12 +60,12 @@ class DelivererController {
       return res.status(400).json({ error: 'Validation failed' });
     }
 
-    const deliverer = await Deliverer.findByPk(deliverer_id);
+    const deliveryMan = await DeliveryMan.findByPk(deliveryman_id);
 
-    if (!deliverer) {
-      return res.status(400).json({ erro: 'Deliverer not found' });
+    if (!deliveryMan) {
+      return res.status(400).json({ erro: 'DeliveryMan not found' });
     }
-    const { id, name, email, avatar_id } = await deliverer.update(req.body);
+    const { id, name, email, avatar_id } = await deliveryMan.update(req.body);
     return res.json({
       id,
       name,
@@ -75,18 +75,18 @@ class DelivererController {
   }
 
   async delete(req, res) {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    const deliverer = await Deliverer.destroy({
+    const deliveryMan = await DeliveryMan.destroy({
       where: { id },
     });
 
-    if (deliverer) {
-      return res.status(200).json({ deleted: 'The deliverer was deleted' });
+    if (deliveryMan) {
+      return res.status(200).json({ deleted: 'The DeliveryMan was deleted' });
     }
 
-    return res.status(400).json({ erro: 'Deliverer not found' });
+    return res.status(400).json({ erro: 'DeliveryMan not found' });
   }
 }
 
-export default new DelivererController();
+export default new DeliveryManController();

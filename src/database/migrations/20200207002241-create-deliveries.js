@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('deliveries', {
@@ -16,9 +14,9 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: false,
       },
-      deliverer_id: {
+      deliveryman_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'deliverers', key: 'id' },
+        references: { model: 'delivery_mans', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: false,
@@ -60,7 +58,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable('deliveries');
   },
 };
