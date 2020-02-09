@@ -107,7 +107,8 @@ class DeliveriesController {
     );
 
     await Notification.create({
-      content: `Nova entrega de ${deliveryman.name} cadastrada no dia ${formattedDate}`,
+      content: `${deliveryman.name}, você tem uma nova entrega cadastrada no 
+      ${formattedDate}, e já encontra-se disponível para retirada.`,
       deliveryman: deliveryman_id,
     });
 
