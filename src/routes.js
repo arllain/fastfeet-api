@@ -10,6 +10,7 @@ import ProductController from './app/controllers/ProductController';
 import DeliveryController from './app/controllers/DeliveryController';
 import UserController from './app/controllers/UserController';
 import NotificationController from './app/controllers/NotificationController';
+import ViewDeliveryController from './app/controllers/ViewDeliveryController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -18,6 +19,12 @@ const upload = multer(multerConfig);
 
 // Session routes
 routes.get('/sessions', SessionController.login);
+
+// Deliveryman functionalities
+routes.get(
+  '/deliveryman/:deliveryman_id/deliveries/',
+  ViewDeliveryController.index
+);
 
 // Auth middleware. All routes bellow it will require an authenticated user
 routes.use(authMiddleware);
@@ -45,6 +52,7 @@ routes.get('/deliveryman', DeliveryManController.index);
 routes.post('/deliveryman', DeliveryManController.store);
 routes.put('/deliveryman/:id', DeliveryManController.update);
 routes.delete('/deliveryman/:id', DeliveryManController.delete);
+routes.get('/deliveryman', DeliveryManController.index);
 
 // Delivery routes
 routes.get('/delivery', DeliveryController.index);
