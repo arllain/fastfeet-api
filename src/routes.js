@@ -11,6 +11,7 @@ import DeliveryController from './app/controllers/DeliveryController';
 import UserController from './app/controllers/UserController';
 import NotificationController from './app/controllers/NotificationController';
 import ViewDeliveryController from './app/controllers/ViewDeliveryController';
+import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -24,6 +25,15 @@ routes.get('/sessions', SessionController.login);
 routes.get(
   '/deliveryman/:deliveryman_id/deliveries/',
   ViewDeliveryController.index
+);
+routes.post(
+  '/delivery/:deliveryId/:deliverymanId/deliverystatus/',
+  DeliveryStatusController.store
+);
+routes.put(
+  '/delivery/:deliveryId/:deliverymanId/deliverystatus/',
+  upload.single('file'),
+  DeliveryStatusController.update
 );
 
 // Auth middleware. All routes bellow it will require an authenticated user
