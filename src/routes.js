@@ -7,9 +7,11 @@ import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import DeliveryManController from './app/controllers/DeliveryManController';
 import ProductController from './app/controllers/ProductController';
-import DeliveriesController from './app/controllers/DeliveriesController';
+import DeliveryController from './app/controllers/DeliveryController';
 import UserController from './app/controllers/UserController';
 import NotificationController from './app/controllers/NotificationController';
+import ViewDeliveryController from './app/controllers/ViewDeliveryController';
+import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -18,6 +20,21 @@ const upload = multer(multerConfig);
 
 // Session routes
 routes.get('/sessions', SessionController.login);
+
+// Deliveryman functionalities
+routes.get(
+  '/deliveryman/:deliveryman_id/deliveries/',
+  ViewDeliveryController.index
+);
+routes.post(
+  '/delivery/:deliveryId/:deliverymanId/deliverystatus/',
+  DeliveryStatusController.store
+);
+routes.put(
+  '/delivery/:deliveryId/:deliverymanId/deliverystatus/',
+  upload.single('file'),
+  DeliveryStatusController.update
+);
 
 // Auth middleware. All routes bellow it will require an authenticated user
 routes.use(authMiddleware);
@@ -45,12 +62,13 @@ routes.get('/deliveryman', DeliveryManController.index);
 routes.post('/deliveryman', DeliveryManController.store);
 routes.put('/deliveryman/:id', DeliveryManController.update);
 routes.delete('/deliveryman/:id', DeliveryManController.delete);
+routes.get('/deliveryman', DeliveryManController.index);
 
-// Deliveries routes
-routes.get('/deliveries', DeliveriesController.index);
-routes.post('/deliveries', DeliveriesController.store);
-routes.put('/deliveries/:id', DeliveriesController.update);
-routes.delete('/deliveries/:id', DeliveriesController.delete);
+// Delivery routes
+routes.get('/delivery', DeliveryController.index);
+routes.post('/delivery', DeliveryController.store);
+routes.put('/delivery/:id', DeliveryController.update);
+routes.delete('/delivery/:id', DeliveryController.delete);
 
 // Notifications routes
 routes.get('/notifications/:deliveryman_id', NotificationController.index);

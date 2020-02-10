@@ -3,16 +3,17 @@ import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import Recipient from '../models/Recipient';
 import DeliveryMan from '../models/DeliveryMan';
-import Deliveries from '../models/Deliveries';
+import Delivery from '../models/Delivery';
 import Product from '../models/Product';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import SendDeliveryMail from '../jobs/SendDeliveryMail';
 
-class DeliveriesController {
+class DeliveryController {
   async index(req, res) {
     const { page = 1 } = req.query;
-    const deliveries = await Deliveries.findAll({
+    const delivery = await Delivery.findAll({
       attributes: ['id', 'start_date', 'end_date', 'canceled_at'],
       limit: 20,
       offset: (page - 1) * 20,
@@ -39,7 +40,7 @@ class DeliveriesController {
         },
       ],
     });
-    res.json(deliveries);
+    res.json(delivery);
   }
 
   async store(req, res) {
@@ -88,7 +89,7 @@ class DeliveriesController {
       return res.status(400).json({ error: 'Product not found' });
     }
 
-    const deliveries = await Deliveries.create({
+    const deliv = await Delivery.create({
       recipient_id,
       deliveryman_id,
       product_id,
@@ -103,22 +104,34 @@ class DeliveriesController {
     );
 
     /**
-     *  Notify deliveryman for new deliveries by email
+     *  Notify deliveryman for new delivery by email
      */
-    await Mail.sendMail({
-      to: `${deliveryman.name} <${deliveryman.email}>`,
-      subject: 'New delivery available',
-      template: 'delivery_new',
-      context: {
-        develiryman: deliveryman.name,
-        deliveryId: deliveries.id,
-        date: formattedDate,
-        product: `${product.id}  ${product.name}`,
-      },
+    const delivery = await Delivery.findByPk(deliv.id, {
+      include: [
+        {
+          model: DeliveryMan,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name'],
+        },
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name'],
+        },
+      ],
+    });
+
+    await Queue.add(SendDeliveryMail.key, {
+      delivery,
     });
 
     /**
-     * Notify deliveryman for new deliveries by messege
+     * Notify deliveryman for new delivery by messege
      */
     await Notification.create({
       content: `${deliveryman.name}, você tem uma nova entrega cadastrada no 
@@ -126,11 +139,11 @@ class DeliveriesController {
       deliveryman: deliveryman_id,
     });
 
-    return res.json(deliveries);
+    return res.json(delivery);
   }
 
   async update(req, res) {
-    const deliveries_id = req.params.id;
+    const delivery_id = req.params.id;
 
     const schema = Yup.object().shape({
       recipient_id: Yup.number(),
@@ -142,9 +155,9 @@ class DeliveriesController {
       return res.status(400).json({ error: 'Validation failed' });
     }
 
-    const deliveries = await Deliveries.findByPk(deliveries_id);
+    const delivery = await Delivery.findByPk(delivery_id);
 
-    if (!deliveries) {
+    if (!delivery) {
       return res.status(400).json({ erro: 'Delivery not found' });
     }
     const {
@@ -152,7 +165,7 @@ class DeliveriesController {
       recipient_id,
       deliveryman_id,
       product_id,
-    } = await deliveries.update(req.body);
+    } = await delivery.update(req.body);
     return res.json({
       id,
       recipient_id,
@@ -164,11 +177,11 @@ class DeliveriesController {
   async delete(req, res) {
     const { id } = req.params;
 
-    const deliveries = await Deliveries.destroy({
+    const delivery = await Delivery.destroy({
       where: { id },
     });
 
-    if (deliveries) {
+    if (delivery) {
       return res.status(200).json({ deleted: 'The delivery was deleted' });
     }
 
@@ -176,4 +189,4 @@ class DeliveriesController {
   }
 }
 
-export default new DeliveriesController();
+export default new DeliveryController();
