@@ -116,7 +116,15 @@ class DeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name'],
+          attributes: [
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'zipcode',
+          ],
         },
         {
           model: Product,

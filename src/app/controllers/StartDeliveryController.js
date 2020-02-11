@@ -9,13 +9,11 @@ import {
   isBefore,
 } from 'date-fns';
 import { Op } from 'sequelize';
-import * as Yup from 'yup';
 import Delivery from '../models/Delivery';
 import DeliveryMan from '../models/DeliveryMan';
-import File from '../models/File';
 
-class DeliveryStatusController {
-  async store(req, res) {
+class StartDeliveryController {
+  async update(req, res) {
     const { deliveryId, deliverymanId } = req.params;
     const { date } = req.query;
 
@@ -30,7 +28,12 @@ class DeliveryStatusController {
     }
 
     const delivery = await Delivery.findOne({
-      where: { id: deliveryId, deliveryman_id: deliverymanId },
+      where: {
+        id: deliveryId,
+        deliveryman_id: deliverymanId,
+        start_date: null,
+        canceled_at: null,
+      },
     });
 
     if (!delivery) {
@@ -47,7 +50,6 @@ class DeliveryStatusController {
         setMinutes(setHours(searchDate, hour), minute),
         0
       );
-
       return {
         time,
         value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx"),
@@ -85,57 +87,6 @@ class DeliveryStatusController {
 
     return res.json(delivery);
   }
-
-  async update(req, res) {
-    const { deliveryId, deliverymanId } = req.params;
-    const { file } = req;
-
-    const schema = Yup.object().shape({
-      originalname: Yup.string().required(),
-      filename: Yup.string().required(),
-    });
-
-    if (!(await schema.isValid(file))) {
-      return res.status(401).json({ error: 'Validations fails' });
-    }
-
-    const deliveryman = await DeliveryMan.findByPk(deliverymanId);
-
-    if (!deliveryman) {
-      return res.status(404).json({ error: 'Deliveryman not found' });
-    }
-
-    const delivery = await Delivery.findOne({
-      where: {
-        id: deliveryId,
-        deliveryman_id: deliverymanId,
-        canceled_at: null,
-      },
-    });
-
-    if (!delivery) {
-      return res.status(404).json({ error: 'Delivery not found' });
-    }
-
-    if (!delivery.start_date) {
-      return res
-        .status(404)
-        .json({ error: 'This delivery has not been picked up' });
-    }
-
-    const { originalname: name, filename: path } = file;
-
-    const { id } = await File.create({
-      name,
-      path,
-    });
-
-    delivery.end_date = new Date();
-    delivery.signature_id = id;
-    delivery.save();
-
-    return res.json(delivery);
-  }
 }
 
-export default new DeliveryStatusController();
+export default new StartDeliveryController();

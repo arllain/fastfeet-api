@@ -1,0 +1,16 @@
+<strong>Hello, {{ deliveryman }}</strong>
+<p>We have canceled a delivery after you reported a problem:</p>
+
+<strong>Problem detail: </strong><br />
+<p>
+  {{ description }}
+</p>
+
+<strong>Delivery details:</strong><br />
+<p>
+  <strong>Delivery Id: </strong>{{ deliveryId }}.<br />
+  <strong>Product: </strong>{{ product }}.<br />
+  <strong>Start date: </strong>{{ startDate }}.<br />
+  <strong>Cancellation date: </strong>{{ canceled_at }}<br />
+  <br /><br />
+</p>

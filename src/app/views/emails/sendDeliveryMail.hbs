@@ -2,7 +2,21 @@
 <p>You have a new delivery available. Please, see bellow for more details:</p>
 <p>
   <strong>Delivery Number:</strong> {{deliveryId}} <br />
-  <strong>Recipient:</strong> {{recipient}} <br />
   <strong>Product:</strong> {{product}} <br />
+  <br />
+  <strong>Recipient details: </strong><br />
+  <p>
+    <strong>Name: </strong>{{ recipientName }}.<br />
+    <strong>Address: </strong>{{ recipientStreet }}.<br />
+    <strong>Number: </strong>{{ recipientNumber }}.<br />
+    <strong>ZipCode: </strong>{{ recipientZipCode }}.<br />
+    <strong>City: </strong>{{ recipientCity }}.<br />
+    <strong>State: </strong>{{ recipientState }}.<br />
+    <strong>Complement: </strong>{{ recipientComplement }}.
+    <br /><br />
+    <small>
+      The product is now available for pick-up at our facilities from 08:00 am to 06:00 pm
+    </small>
+  </p>
   <br />
 </p>

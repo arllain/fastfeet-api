@@ -11,7 +11,9 @@ import DeliveryController from './app/controllers/DeliveryController';
 import UserController from './app/controllers/UserController';
 import NotificationController from './app/controllers/NotificationController';
 import ViewDeliveryController from './app/controllers/ViewDeliveryController';
-import DeliveryStatusController from './app/controllers/DeliveryStatusController';
+import StartDeliveryController from './app/controllers/StartDeliveryController';
+import EndDeliveryController from './app/controllers/EndDeliveryController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -26,15 +28,16 @@ routes.get(
   '/deliveryman/:deliveryman_id/deliveries/',
   ViewDeliveryController.index
 );
-routes.post(
-  '/delivery/:deliveryId/:deliverymanId/deliverystatus/',
-  DeliveryStatusController.store
+routes.put(
+  '/delivery/:deliveryId/:deliverymanId/start/',
+  StartDeliveryController.update
 );
 routes.put(
-  '/delivery/:deliveryId/:deliverymanId/deliverystatus/',
+  '/delivery/:deliveryId/:deliverymanId/end/',
   upload.single('file'),
-  DeliveryStatusController.update
+  EndDeliveryController.update
 );
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
 
 // Auth middleware. All routes bellow it will require an authenticated user
 routes.use(authMiddleware);
@@ -57,7 +60,7 @@ routes.post('/products', ProductController.store);
 routes.put('/products/:id', ProductController.update);
 routes.delete('/products/:id', ProductController.delete);
 
-// DeliveryMan routes
+// DeliveryMan  routes
 routes.get('/deliveryman', DeliveryManController.index);
 routes.post('/deliveryman', DeliveryManController.store);
 routes.put('/deliveryman/:id', DeliveryManController.update);
@@ -73,5 +76,10 @@ routes.delete('/delivery/:id', DeliveryController.delete);
 // Notifications routes
 routes.get('/notifications/:deliveryman_id', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
+
+// FastFeet routs
+routes.get('/delivery/problems', DeliveryProblemController.index);
+routes.get('/delivery/:id/problems', DeliveryProblemController.show);
+routes.put('/problem/:id/cancel-delivery', DeliveryProblemController.updat);
 
 export default routes;
