@@ -109,6 +109,9 @@ Add additional notes about how to deploy this on a live system.
 - [nodemailer-express-handlebars](https://github.com/yads/nodemailer-express-handlebars) - nodemailer-express-handlebars
 - [express-handlebars](https://github.com/ericf/express-handlebars) - express-handlebars
 - [bee-queue](https://github.com/bee-queue/bee-queue) - bee-queue
+- [sentry](https://github.com/getsentry/sentry-javascript) - sentry
+- [express-async-errors](https://github.com/davidbanham/express-async-errors) - express-async-errors
+- [youch](https://github.com/poppinss/youch) - youch
 
 ## ✍️ Authors <a name = "authors"></a>
 
