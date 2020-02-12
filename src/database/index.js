@@ -7,8 +7,17 @@ import DeliveryMan from '../app/models/DeliveryMan';
 import Delivery from '../app/models/Delivery';
 import File from '../app/models/File';
 import Product from '../app/models/Product';
+import DeliveryProblem from '../app/models/DeliveryProblem';
 
-const models = [User, Recipient, DeliveryMan, File, Product, Delivery];
+const models = [
+  User,
+  Recipient,
+  DeliveryMan,
+  File,
+  Product,
+  Delivery,
+  DeliveryProblem,
+];
 
 class Database {
   constructor() {
@@ -24,10 +33,10 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect(
-      'mongodb://localhost:27017/fastfeet',
-      { useNewUrlParser: true, useFindAndModify: true }
-    );
+    this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useFindAndModify: true,
+    });
   }
 }
 

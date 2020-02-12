@@ -1,5 +1,3 @@
-import { format, parseISO } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 import Mail from '../../lib/Mail';
 
 class SendDeliveryMail {
@@ -16,9 +14,15 @@ class SendDeliveryMail {
       template: 'sendDeliveryMail',
       context: {
         develiryman: delivery.deliveryman.name,
-        deliveryId: delivery.id,
-        recipient: delivery.recipient.name,
         product: delivery.product.name,
+        deliveryId: delivery.id,
+        recipientName: delivery.recipient.name,
+        recipientStreet: delivery.recipient.street,
+        recipientNumber: delivery.recipient.number,
+        recipientZipCode: delivery.recipient.zipcode,
+        recipientCity: delivery.recipient.city,
+        recipientState: delivery.recipient.state,
+        recipientComplement: delivery.recipient.complement || '',
       },
     });
   }

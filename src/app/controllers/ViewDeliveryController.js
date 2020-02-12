@@ -1,4 +1,4 @@
-import Op from 'sequelize';
+import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import DeliveryMan from '../models/DeliveryMan';
 import Recipient from '../models/Recipient';
