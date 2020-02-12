@@ -112,6 +112,7 @@ Add additional notes about how to deploy this on a live system.
 - [sentry](https://github.com/getsentry/sentry-javascript) - sentry
 - [express-async-errors](https://github.com/davidbanham/express-async-errors) - express-async-errors
 - [youch](https://github.com/poppinss/youch) - youch
+- [dotenv](https://github.com/motdotla/dotenv) - dotenv
 
 ## ✍️ Authors <a name = "authors"></a>
 
