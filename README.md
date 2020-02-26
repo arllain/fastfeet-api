@@ -114,4 +114,4 @@ Add additional notes about how to deploy this on a live system.
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@arllain](https://github.com/arllain) - Idea & Initial work
+- [@arllain](https://github.com/arllain)
