@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { Op } from 'sequelize';
 import Recipient from '../models/Recipient';
 import DeliveryMan from '../models/DeliveryMan';
 import Delivery from '../models/Delivery';
@@ -12,7 +13,7 @@ import SendDeliveryMail from '../jobs/SendDeliveryMail';
 
 class DeliveryController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    const { page = 1, prod_name } = req.query;
     const delivery = await Delivery.findAll({
       attributes: ['id', 'start_date', 'end_date', 'canceled_at'],
       limit: 20,
@@ -37,6 +38,16 @@ class DeliveryController {
           as: 'deliveryman',
           attributes: ['id', 'name', 'email', 'avatar_id'],
           include: [{ model: File, as: 'avatar', attributes: ['url', 'path'] }],
+        },
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name'],
+          where: {
+            name: {
+              [Op.iLike]: `%${prod_name}%`,
+            },
+          },
         },
       ],
     });
