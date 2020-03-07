@@ -21,7 +21,7 @@ const upload = multer(multerConfig);
 // No authentication needed routes
 
 // Session routes
-routes.get('/sessions', SessionController.login);
+routes.post('/sessions', SessionController.login);
 
 // Deliveryman functionalities
 routes.get(
