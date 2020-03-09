@@ -39,14 +39,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-```bash
-# Clone this repository
-$ git clone https://github.com/arllain/fastfeet-api.git
-
-# Go into the repository
-$ cd fastfeet-api
-```
-
 You need create a database PostgreSQL, MongoDB and Redis to run backend
 
 ```bash
@@ -59,6 +51,12 @@ docker run --name fastfeet_mongo -p 27017:27017 -d -t mongo
 
 # Creating a redis database in Docker
 docker run --name redisfastfeet -p 6378:6379 -d -t redis:alpine
+
+```
+
+```bash
+# Clone this repository
+$ git clone https://github.com/arllain/fastfeet-api.git
 
 # Go into api
 $ cd fastfeet-api
@@ -77,7 +75,6 @@ $ yarn dev
 
 # Debug the api
 $ yarn dev:debug
-
 ```
 
 ## 🔧 Running the tests <a name = "tests"></a>
