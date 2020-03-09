@@ -50,6 +50,16 @@ $ cd fastfeet-api
 You need create a database PostgreSQL, MongoDB and Redis to run backend
 
 ```bash
+
+# Creating a postgreSQL database in Docker
+docker run --name fastfeet_db -e POSTGRES_PASSWORD=yuor password -p 5432:5432 -d postgres
+
+# Creating a mongo database in Docker
+docker run --name fastfeet_mongo -p 27017:27017 -d -t mongo
+
+# Creating a redis database in Docker
+docker run --name redisfastfeet -p 6378:6379 -d -t redis:alpine
+
 # Go into api
 $ cd fastfeet-api
 
