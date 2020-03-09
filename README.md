@@ -22,7 +22,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+This api is to serve the fastfeet app mobile and web.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -30,29 +30,45 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
+- A MongoDB Database ([MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or [Docker Mongo](https://hub.docker.com/_/mongo))
+- A PostgreSQL Database ([PostgreSQL](https://www.postgresql.org/) or [Docker PostgreSQL](https://hub.docker.com/_/postgres))
+- Redis ([Redis](https://https://redis.io/) or [Docker Redis](https://hub.docker.com/_/redis/))
+- Insomnia REST Client ([Insomnia](https://insomnia.rest/download/))
+- [Node](https://nodejs.org/en/) installed (Recommend LTS)
+- [Yarn](https://yarnpkg.com/en/docs/install#debian-stable) or Npm (Just install Node)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+```bash
+# Clone this repository
+$ git clone https://github.com/arllain/fastfeet-api.git
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+# Go into the repository
+$ cd fastfeet-api
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+You need create a database PostgreSQL, MongoDB and Redis to run backend
+
+```bash
+# Go into api
+$ cd fastfeet-api
+
+# Install dependencies
+$ yarn
+
+# Execute migrations
+$ yarn sequelize db:migrate
+
+# And execute seeds
+$ yarn sequelize db:seed:all
+
+# Run the api
+$ yarn dev
+
+# Debug the api
+$ yarn dev:debug
+
+```
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
