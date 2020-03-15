@@ -13,11 +13,13 @@ import SendDeliveryMail from '../jobs/SendDeliveryMail';
 
 class DeliveryController {
   async index(req, res) {
-    const { page = 1, prod_name } = req.query;
+    const { page = 1, q = '' } = req.query;
+    const limit = 10;
+    const offset = (page - 1) * limit;
     const delivery = await Delivery.findAll({
       attributes: ['id', 'start_date', 'end_date', 'canceled_at'],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit,
+      offset,
       include: [
         {
           model: Recipient,
@@ -45,11 +47,13 @@ class DeliveryController {
           attributes: ['id', 'name'],
           where: {
             name: {
-              [Op.iLike]: `%${prod_name}%`,
+              [Op.iLike]: `%${q}%`,
             },
           },
         },
+        { model: File, as: 'file', attributes: ['url', 'path'] },
       ],
+      order: ['id'],
     });
     res.json(delivery);
   }
