@@ -4,11 +4,15 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
   async index(req, res) {
-    const { name } = req.query;
+    const { page = 1, q = '' } = req.query;
+    const limit = 6;
+    const offset = (page - 1) * limit;
     const recipient = await Recipient.findAll({
+      limit,
+      offset,
       where: {
         name: {
-          [Op.iLike]: `%${name}%`,
+          [Op.iLike]: `%${q}%`,
         },
       },
     });
