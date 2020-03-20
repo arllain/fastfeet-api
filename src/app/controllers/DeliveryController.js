@@ -14,7 +14,7 @@ import SendDeliveryMail from '../jobs/SendDeliveryMail';
 class DeliveryController {
   async index(req, res) {
     const { page = 1, q = '' } = req.query;
-    const limit = 10;
+    const limit = 6;
     const offset = (page - 1) * limit;
     const delivery = await Delivery.findAll({
       attributes: ['id', 'start_date', 'end_date', 'canceled_at'],
