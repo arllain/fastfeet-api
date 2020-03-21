@@ -116,6 +116,22 @@ class RecipientController {
       return res.status(500).json({ error: 'Recipient could not be updated' });
     }
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const recipient = await Recipient.destroy({
+      where: { id },
+    });
+
+    if (recipient) {
+      return res
+        .status(200)
+        .json({ deleted: 'The Recipient was succesful deleted' });
+    }
+
+    return res.status(400).json({ erro: 'Recipient not found' });
+  }
 }
 
 export default new RecipientController();
