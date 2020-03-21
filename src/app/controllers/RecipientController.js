@@ -15,6 +15,7 @@ class RecipientController {
           [Op.iLike]: `%${q}%`,
         },
       },
+      order: ['id'],
     });
     res.json(recipient);
   }
