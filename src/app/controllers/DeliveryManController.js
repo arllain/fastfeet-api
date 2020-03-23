@@ -4,6 +4,24 @@ import DeliveryMan from '../models/DeliveryMan';
 import File from '../models/File';
 
 class DeliveryManController {
+  async show(req, res) {
+    const { id } = req.params;
+    const deliveryMan = await DeliveryMan.findOne({
+      where: { id },
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+        },
+      ],
+    });
+    if (!deliveryMan) {
+      return res.status(400).json({ error: 'DeliveryMan not found' });
+    }
+
+    return res.json(deliveryMan);
+  }
+
   async index(req, res) {
     const { page = 1, q = '' } = req.query;
     const limit = 6;
