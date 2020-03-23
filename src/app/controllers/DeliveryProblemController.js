@@ -13,13 +13,18 @@ import Queue from '../../lib/Queue';
 class DeliveryProblemController {
   async index(req, res) {
     const { page = 1 } = req.query;
+    const limit = 6;
+    const offset = (page - 1) * limit;
     const deliveryProblems = await DeliveryProblem.findAll({
       attributes: ['id', 'description'],
+      limit,
+      offset,
       include: [
         {
           model: Delivery,
           as: 'delivery',
           attributes: ['id', 'start_date', 'end_date', 'canceled_at'],
+          order: ['id'],
           include: [
             {
               model: DeliveryMan,
@@ -47,9 +52,6 @@ class DeliveryProblemController {
           ],
         },
       ],
-      order: ['id'],
-      limit: 20,
-      offset: (page - 1) * 20,
     });
 
     return res.json(deliveryProblems);
