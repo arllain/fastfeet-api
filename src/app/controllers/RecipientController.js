@@ -3,6 +3,18 @@ import { Op } from 'sequelize';
 import Recipient from '../models/Recipient';
 
 class RecipientController {
+  async show(req, res) {
+    const { id } = req.params;
+    const recipient = await Recipient.findOne({
+      where: { id },
+    });
+    if (!recipient) {
+      return res.status(400).json({ error: 'Recipient not found' });
+    }
+
+    return res.json(recipient);
+  }
+
   async index(req, res) {
     const { page = 1, q = '' } = req.query;
     const limit = 6;
