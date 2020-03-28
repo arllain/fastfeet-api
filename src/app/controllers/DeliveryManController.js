@@ -41,6 +41,7 @@ class DeliveryManController {
           as: 'avatar',
         },
       ],
+      order: ['id'],
     });
     res.json(deliveryMan);
   }
