@@ -12,6 +12,44 @@ import Queue from '../../lib/Queue';
 import SendDeliveryMail from '../jobs/SendDeliveryMail';
 
 class DeliveryController {
+  async show(req, res) {
+    const { id } = req.params;
+    const delivery = await Delivery.findOne({
+      attributes: ['id', 'start_date', 'end_date', 'canceled_at'],
+      where: { id },
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'zipcode',
+          ],
+        },
+        {
+          model: DeliveryMan,
+          as: 'deliveryman',
+          attributes: ['id', 'name', 'email', 'avatar_id'],
+          include: [{ model: File, as: 'avatar', attributes: ['url', 'path'] }],
+        },
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name'],
+        },
+        { model: File, as: 'file', attributes: ['url', 'path'] },
+      ],
+      order: ['id'],
+    });
+    res.json(delivery);
+  }
+
   async index(req, res) {
     const { page = 1, q = '' } = req.query;
     const limit = 6;

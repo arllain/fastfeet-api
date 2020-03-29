@@ -57,6 +57,7 @@ class RecipientController {
       }
 
       const {
+        id,
         name,
         street,
         number,
@@ -67,6 +68,7 @@ class RecipientController {
       } = await Recipient.create(req.body);
 
       return res.json({
+        id,
         name,
         street,
         number,
@@ -76,7 +78,6 @@ class RecipientController {
         zipcode,
       });
     } catch (error) {
-      console.log('Error creating a recipient', error);
       return res.status(500).json({ error: 'Recipient could not be created' });
     }
   }

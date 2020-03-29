@@ -73,6 +73,7 @@ routes.get('/deliveryman/:id', DeliveryManController.show);
 
 // Delivery routes
 routes.get('/delivery', DeliveryController.index);
+routes.get('/delivery/:id', DeliveryController.show);
 routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery/:id', DeliveryController.update);
 routes.delete('/delivery/:id', DeliveryController.delete);
