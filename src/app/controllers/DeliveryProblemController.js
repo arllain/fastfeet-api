@@ -19,6 +19,7 @@ class DeliveryProblemController {
       attributes: ['id', 'description'],
       limit,
       offset,
+      order: ['id'],
       include: [
         {
           model: Delivery,
