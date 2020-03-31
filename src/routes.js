@@ -39,6 +39,8 @@ routes.put(
 );
 routes.post('/delivery/:id/problems', DeliveryProblemController.store);
 
+routes.get('/delivery/problems', DeliveryProblemController.index);
+
 // Auth middleware. All routes bellow it will require an authenticated user
 routes.use(authMiddleware);
 
@@ -83,7 +85,6 @@ routes.get('/notifications/:deliveryman_id', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
 
 // FastFeet routs
-routes.get('/delivery/problems', DeliveryProblemController.index);
 routes.get('/delivery/:id/problems', DeliveryProblemController.show);
 routes.put('/problem/:id/cancel-delivery', DeliveryProblemController.updat);
 
