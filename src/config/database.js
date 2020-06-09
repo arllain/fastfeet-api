@@ -10,15 +10,9 @@ module.exports = {
   port: process.env.DB_PORT,
   database: process.env.DB_NAME,
 
-  // connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
-
-  // cli: {
-  //   migrationsDir: ['src/database/migrations/'],
-  //   entitiesDir: 'src/app/models',
-  // },
 
   define: {
     timestamp: true,
