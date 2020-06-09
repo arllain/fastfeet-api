@@ -17,16 +17,10 @@ module.exports = {
       underscoredAll: true,
     },
   },
-  test: {
-    username: process.env.PGUSER || 'root',
-    password: null,
-    database: 'react_webpack_node_test',
-    host: '127.0.0.1',
-    dialect: 'postgres',
-  },
   production: {
+    type: 'postgres',
     dialect: 'postgres',
-    use_env_variable: 'DATABASE_URL',
+    use_env_variable: process.env.DATABASE_URL,
   },
 };
 
