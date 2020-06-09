@@ -8,7 +8,7 @@ console.log(`process.env.DB_NAME = ${process.env.DB_NAME}`);
 
 module.exports = {
   type: 'postgres',
-  // url: process.env.DATABASE_URL,
+  url: process.env.DATABASE_URL,
   dialect: 'postgres',
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
